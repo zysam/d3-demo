@@ -23,7 +23,14 @@ var root = {
     	{value: 1},
     	{value: 2}
     ]
-    }
+  },
+  {
+    children: [
+      {value: 3},
+      {value: 4},
+      {value: 1}
+    ]
+  }
   ]
 };
 
@@ -45,6 +52,10 @@ svg.selectAll("circle")
     .attr("cx", function(d) { return d.x; })
     .attr("cy", function(d) { return d.y; })
     .attr("r", function(d) { return d.r; })
-    .attr("fill", function(d,i) { return color(i); });
+    .attr("fill", function(d,i) { return color(i); })
+    .on('click', click);
+function click (d) {
+  console.log('d ->', d)
+}
 
 </script>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - svg:line</title>
+		<style type="text/css">
+			.mytable {
+				table-layout: auto;
+				stroke: #ccc;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<div>
+			<table class='mytable'>
+				<thead>
+					<tr>
+						<td> 用户 U1</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td id='a1'> 标的 A1 </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div>
+			<table class='mytable'>
+				<thead>
+					<tr>
+						<td> 用户 U2</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td id='a1'> 标的 A2 </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script type="text/javascript">
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			svg.append('line')
+				.attr({
+					//line起点坐标：(100,100)
+					"x1": 100, "y1": 100,
+					//line终点坐标：(200,200)
+					"x2": 200, "y2": 200,
+					x3: 300, y3: 400
+				})
+				.style({
+					//line颜色：indigo
+					"stroke": "indigo",
+					//line粗细：5
+					"stroke-width": 5
+				});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+circle {
+  stroke: #000;
+}
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+
+var root = {
+  children: [
+    {
+      children: [
+        {value: 1},
+        {value: 2},
+        {value: 1},
+        {value: 1},
+        {value: 3},
+        {value: 1}
+      ]
+    }
+  ]
+};
+
+var width = 200,
+    height = 150;
+
+var color =d3.scale.category20();
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+
+var pack = d3.layout.pack()
+    .size([width, height]);
+
+redraw(root);
+function redraw (source) {
+  svg.selectAll("circle")
+      .data(pack.nodes(source))
+    .enter().append("circle")
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; })
+      .attr("r", function(d) { return d.r; })
+      .attr("fill", function(d,i) { return color(i); })
+      .on('click', click);
+}
+function click (d) {
+  console.log('d ->', d);
+  // console.log(d.nodes);
+  console.log('select: ', d3.select(this));
+  d3.select(this).style('background', 'green');
+  toggle(d);
+  redraw(d);
+}
+function toggle (d) {
+  if (d.depth === 1) {
+    if (d.children) {
+      d._children = d.children
+      d.children = null
+    } else {
+      d.children = d._children
+      d._children = null
+    }
+  } else {
+    if (d.parent) {
+      d._parent = d.parent
+      d.parent = null
+    } else {
+      d.parent = d._parent
+      d._parent = null
+    }
+  }
+}
+</script>
